@@ -15,6 +15,79 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <h1 class="inter-font">hello green Earth</h1>
+    <nav class="">
+      <div
+        class="flex justify-between items-center bg-green-600 py-[24px] px-[135px] max-w-[1920px] mx-auto"
+      >
+        <div class="flex">
+          <img class="" src="./assets/Green Earth.png" alt="" />
+        </div>
+        <div>
+          <ul class="flex items-center gap-10 text-white">
+            <li>About</li>
+            <li>Gallery</li>
+            <li>Plant a Tree</li>
+          </ul>
+        </div>
+        <button
+          class="text-[#15803d] bg-[#facc15] px-3 py-2 rounded-full cursor-pointer"
+        >
+          Plant a Tree
+        </button>
+      </div>
+    </nav>
+
+    <main class="">
+      <!-- banner section  -->
+
+      <div class="bg-[#cff0dc] max-w-[1920px] mx-auto">
+        <div class="flex justify-between items-center">
+          <div>
+            <img src="./assets/hero-leaf1.png" alt="" />
+          </div>
+
+          <div class="space-y-3 text-center inter-font">
+            <h1 class="text-4xl font-bold">Plant a Tree, Grow a Future</h1>
+            <p>
+              Join our mission to plant 1 million trees and make the Earth
+              greener for future <br />
+              generations.
+            </p>
+            <button
+              class="text-[#15803d] bg-[#facc15] px-3 py-2 rounded-full cursor-pointer mt-3"
+            >
+              Get Involved
+            </button>
+          </div>
+          <div>
+            <img src="./assets/hero-leaf2.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <section class="bg-[#F0FDF4]">
+        <h1 class="text-center text-4xl p-8 font-semibold">
+          Choose Your Trees
+        </h1>
+        <div
+          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-2 border-red-400 border-2"
+        >
+          <div id="" class="categories col-span-2 border-1 border-gray-800">
+            <h2 class="text-xl font-semibold px-2">Categories</h2>
+            <ul id="categoryContainer">
+              <li
+                class="hover:bg-[#15803d] cursor-pointer hover:text-white px-3 py-1"
+              >
+                All Trees
+              </li>
+            </ul>
+          </div>
+          <div class="categories col-span-8 border-1 border-green-400"></div>
+          <div class="categories col-span-2 border-1 border-blue-600"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./index.js"></script>
   </body>
 </html>
