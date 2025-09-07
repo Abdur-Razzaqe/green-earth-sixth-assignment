@@ -15,43 +15,68 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <nav class="">
-      <div
-        class="flex justify-between items-center bg-green-600 py-[24px] px-[135px] max-w-[1920px] mx-auto"
-      >
-        <div class="flex">
-          <img class="" src="./assets/Green Earth.png" alt="" />
-        </div>
-        <div>
-          <ul class="flex items-center gap-10 text-white">
-            <li>About</li>
-            <li>Gallery</li>
-            <li>Plant a Tree</li>
+    <div
+      class="navbar bg-[#15803D] md:px-[135px] py-[24px] max-w-[1920px] mx-auto"
+    >
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-white"
+          >
+            <li><a>About</a></li>
+            <li><a>Gallery</a></li>
+            <li><a>Plant a Tree</a></li>
           </ul>
         </div>
-        <button
-          class="text-[#15803d] bg-[#facc15] px-3 py-2 rounded-full cursor-pointer"
-        >
-          Plant a Tree
-        </button>
+        <a class="btn btn-ghost text-xl"
+          ><img src="./assets/Green Earth.png" alt=""
+        /></a>
       </div>
-    </nav>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1 text-white">
+          <li><a>About</a></li>
+          <li><a>Gallery</a></li>
+          <li><a>Plant a Tree</a></li>
+        </ul>
+      </div>
+      <div class="navbar-end">
+        <a
+          class="text-[#15803d] bg-[#facc15] px-2 py-1 rounded-full cursor-pointer mt-3"
+          >Plant a Tree</a
+        >
+      </div>
+    </div>
 
     <main class="">
       <!-- banner section  -->
 
-      <div class="bg-[#cff0dc] max-w-[1920px] mx-auto">
-        <div class="flex justify-between items-center">
+      <div class="bg-[#cff0dc] gap-5 max-w-[1920px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center">
           <div>
-            <img src="./assets/hero-leaf1.png" alt="" />
+            <img ms:w-[250px] h-[200px] src="./assets/hero-leaf1.png" alt="" />
           </div>
 
-          <div class="space-y-3 text-center inter-font">
+          <div class="space-y-3 text-center inter-font mt-4 p-2">
             <h1 class="text-4xl font-bold">Plant a Tree, Grow a Future</h1>
-            <p>
+            <p class="text-sm">
               Join our mission to plant 1 million trees and make the Earth
-              greener for future <br />
-              generations.
+              greener for future generations.
             </p>
             <button
               class="text-[#15803d] bg-[#facc15] px-3 py-2 rounded-full cursor-pointer mt-3"
@@ -64,26 +89,26 @@
           </div>
         </div>
       </div>
-
+      <!-- card section  -->
       <section class="bg-[#F0FDF4]">
         <h1 class="text-center text-4xl p-8 font-semibold">
           Choose Your Trees
         </h1>
         <div
-          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-2 border-red-400 border-2"
+          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-2"
         >
-          <div id="" class="categories col-span-2 border-1 border-gray-800">
+          <div class="categories col-span-2">
             <h2 class="text-xl font-semibold px-2">Categories</h2>
-            <ul id="categoryContainer">
-              <li
-                class="hover:bg-[#15803d] cursor-pointer hover:text-white px-3 py-1"
-              >
-                All Trees
-              </li>
-            </ul>
+            <div id=""></div>
+            <ul id="categoryContainer"></ul>
           </div>
-          <div class="categories col-span-8 border-1 border-green-400"></div>
-          <div class="categories col-span-2 border-1 border-blue-600"></div>
+          <div
+            id="plantsContainer"
+            class="categories grid grid-cols-3 col-span-8"
+          >
+            <div></div>
+          </div>
+          <div class="categories col-span-2 gap-2"></div>
         </div>
       </section>
     </main>
