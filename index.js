@@ -38,6 +38,7 @@ const showCategory = (categories) => {
 };
 
 const loadPlantsByCategory = (categoryId) => {
+  console.log(categoryId);
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((data) => {
@@ -49,6 +50,7 @@ const loadPlantsByCategory = (categoryId) => {
 };
 const showPlantsByCategory = (plants) => {
   console.log(plants);
+  plantsContainer.innerHTML = "";
   plants.forEach((plants) => {
     plantsContainer.innerHTML += `
     <div class=" gap-3  text-justify ">
@@ -69,3 +71,5 @@ const showPlantsByCategory = (plants) => {
   });
 };
 loadCategory();
+
+loadPlantsByCategory("plants");
