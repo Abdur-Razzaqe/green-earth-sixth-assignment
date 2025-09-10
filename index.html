@@ -11,6 +11,16 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <!-- stylesheet  -->
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
@@ -37,14 +47,14 @@
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-white"
+            class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-white border-b-1"
           >
             <li><a>About</a></li>
             <li><a>Gallery</a></li>
             <li><a>Plant a Tree</a></li>
           </ul>
         </div>
-        <a class="btn btn-ghost text-xl"
+        <a class="btn-ghost text-xl"
           ><img src="./assets/Green Earth.png" alt=""
         /></a>
       </div>
@@ -89,27 +99,34 @@
           </div>
         </div>
       </div>
+      <!-- spinner -->
+      <div>
+        <span
+          id="spinner"
+          class="loading loading-dots loading-md flex justify-center items-center text-center"
+        ></span>
+      </div>
       <!-- card section  -->
       <section class="bg-[#F0FDF4]">
         <h1 class="text-center text-4xl p-8 font-semibold">
           Choose Your Trees
         </h1>
         <div
-          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-5"
+          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-5 flex-col md:flex-row"
         >
-          <div class="categories col-span-2">
+          <div class="categories col-span-2 w-full">
             <h2 class="text-xl font-semibold px-2">Categories</h2>
-            <div id=""></div>
-            <ul id="categoryContainer"></ul>
+            <ul id="categoryContainer" class="rounded-xl"></ul>
           </div>
           <div
             id="plantsContainer"
             class="categories grid grid-cols-3 col-span-8"
+          ></div>
+          <div
+            class="categories col-span-2 gap-2 bg-[#FFFFFF] p-2 w-full flex-col rounded-lg shadow-md"
           >
-            <div></div>
-          </div>
-          <div class="categories col-span-2 gap-2 bg-[#FFFFFF] p-2">
-            <h2>Your Cart</h2>
+            <h2 class="text-xl font-bold mb-3">Your Cart</h2>
+            <div id="cartContainer" class="space-y-2"></div>
           </div>
         </div>
       </section>
@@ -125,7 +142,7 @@
           >
             <img src="./assets/about.png" alt="" />
             <div class="mb-2">
-              <p class="">
+              <p class="p-2 text-justify">
                 Green Earth is a global tree plantation initiative dedicated to
                 fighting climate change. Since our start, we've planted over
                 500,000 trees worldwide. By joining our campaign, you help
@@ -149,9 +166,11 @@
             Our Impact
           </h1>
           <div
-            class="flex justify-between items-center gap-[50px] p-[40px] flex-col md:flex-row"
+            class="flex justify-between items-center gap-[50px] p-[40px] sm:p-[20px] flex-col md:flex-row"
           >
-            <div class="card card-border bg-base-100 w-[516px]">
+            <div
+              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+            >
               <div class="card-body text-center space-y-0">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   500K+
@@ -159,7 +178,9 @@
                 <p>Trees Planted</p>
               </div>
             </div>
-            <div class="card card-border bg-base-100 w-[516px]">
+            <div
+              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+            >
               <div class="card-body text-center space-y-0">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   120+
@@ -167,7 +188,9 @@
                 <p>Communities Involved</p>
               </div>
             </div>
-            <div class="card card-border bg-base-100 w-[516px]">
+            <div
+              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+            >
               <div class="card-body text-center space-y-0">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   30+
@@ -184,7 +207,7 @@
           Plant a Tree Today
         </h1>
         <div class="flex justify-center items-cente p-[40px]">
-          <div class="card bg-[#07943b] w-[650px] h-[311px]">
+          <div class="card bg-[#07943b] w-[650px] h-[290px] md:w-[500px]">
             <div class="card-body">
               <fieldset class="fieldset rounded-box w-full p-4">
                 <input
@@ -199,9 +222,9 @@
                 />
                 <select class="select w-full rounded-box">
                   <option disabled selected>Number of Trees</option>
-                  <option>Crimson</option>
-                  <option>Amber</option>
-                  <option>Velvet</option>
+                  <option>1 Tree - $5</option>
+                  <option>5 Trees - $25</option>
+                  <option>10 Trees - $50</option>
                 </select>
                 <button
                   class="btn text-[#15803d] bg-[#facc15] px-3 rounded-full mt-4"
@@ -213,8 +236,32 @@
           </div>
         </div>
       </section>
+      <!-- Open the modal using ID.showModal() method -->
+      <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+      <dialog id="plant_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <div id="detailContainer" class="space-y-3"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
-
+    <!-- footer section  -->
+    <section class="max-w-[1920px] mx-auto">
+      <footer
+        class="footer sm:footer-horizontal footer-center bg-[#14532d] text-base-content p-4"
+      >
+        <aside>
+          <p class="text-white text-center p-4">
+            © 2025 Green Earth. All Rights Reserved.
+          </p>
+        </aside>
+      </footer>
+    </section>
     <script src="./index.js"></script>
   </body>
 </html>

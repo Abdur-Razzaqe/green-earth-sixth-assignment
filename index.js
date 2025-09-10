@@ -1,68 +1,97 @@
 const categoryContainer = document.getElementById("categoryContainer");
-
 const plantsContainer = document.getElementById("plantsContainer");
-
-const loadPlants = () => {
-  fetch("https://openapi.programming-hero.com/api/plants")
-    .then((res) => res.json())
-    .then((data) => console.log(data));
-};
+const cartContainer = document.getElementById("cartContainer");
+const plantModal = document.getElementById("plant_modal");
+let carts = [];
 
 const loadCategory = () => {
   fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
-    .then((data) => {
-      const categories = data.categories;
-      showCategory(categories);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((data) => showCategory(data.categories))
+    .catch((err) => console.log(err));
 };
+// show categories
+
 const showCategory = (categories) => {
+  categoryContainer.innerHTML += `<li id="all-trees" class="hover:bg-[#15803d] cursor-pointer hover:text-white px-3 py-1 category">All Trees</li>`;
+
   categories.forEach((cat) => {
-    categoryContainer.innerHTML += `<li id="${cat.id}" class="hover:bg-[#15803d]  cursor-pointer hover:text-white px-3 py-1">
-                  ${cat.category_name}
-                </li>`;
+    categoryContainer.innerHTML += `<li id="${cat.id}" class="hover:bg-[#15803d] name  cursor-pointer hover:text-white px-3 py-1 category">
+${cat.category_name}</li>`;
   });
+
+  const allLi = document.querySelectorAll("li");
+  loadAllPlants();
+
   categoryContainer.addEventListener("click", (e) => {
-    const allLi = document.querySelectorAll("li");
-    allLi.forEach((li) => {
-      li.classList.remove("bg-[#15803d]");
-    });
+    allLi.forEach((li) => li.classList.remove("bg-[#15803d]", "text-white"));
     if (e.target.localName === "li") {
-      e.target.classList.add("bg-[#15803d]");
-      loadPlantsByCategory(e.target.id);
+      e.target.classList.add("bg-[#15803d]", "text-white");
+      if (e.target.id === "all-trees") {
+        loadAllPlants();
+      } else {
+        loadPlantsByCategory(e.target.id);
+      }
     }
   });
 };
 
-const loadPlantsByCategory = (categoryId) => {
-  console.log(categoryId);
+// spinner;
+const spinner = document.getElementById("spinner");
+const showSpinner = () => {
+  spinner.classList.remove("hidden");
+};
+
+const hideSpinner = () => {
+  spinner.classList.add("hidden");
+};
+
+// load all plants for all trees
+
+const loadAllPlants = () => {
+  showSpinner();
+  fetch("https://openapi.programming-hero.com/api/plants")
+    .then((res) => res.json())
+    .then((data) => {
+      showPlantsByCategory(data.plants.slice(0, 6));
+      hideSpinner();
+    });
+  // .catch((err)) => console.log(err)
+};
+
+// load plants by category
+
+const loadPlantsByCategory = (categoryId, limit = null) => {
+  showSpinner();
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((data) => {
-      showPlantsByCategory(data.plants);
+      let plants = data.plants;
+      if (limit) plants = plants.slice(0, limit);
+      showPlantsByCategory(plants);
+      hideSpinner();
     })
     .catch((err) => {
       console.log(err);
+      hideSpinner();
     });
 };
+
+// show plants
 const showPlantsByCategory = (plants) => {
-  console.log(plants);
   plantsContainer.innerHTML = "";
-  plants.forEach((plants) => {
+  plants.forEach((plant) => {
     plantsContainer.innerHTML += `
     <div class=" gap-3  text-justify ">
-       <div class=" bg-[#FFFFFF] rounded-lg p-2 m-2 space-y-2">
-       <img src="${plants.image}" alt="" class="w-full h-[186px] bg-[#ededed] rounded-lg" />
-              <h3>${plants.name}</h3>
-              <p>${plants.description}</p>
+       <div class=" bg-[#FFFFFF] rounded-lg p-2 m-2 space-y-2 shadow hover:shadow-lg transition">
+       <img src="${plant.image}" alt="" class="w-full h-48 sm:h-40 md:h-48 lg:h-56 bg-[#ededed] rounded-lg object-cover" />
+              <h3 onclick="loadPlantDetail(${plant.id})" class=" font-semibold cursor-pointer text-lg sm:text-base md:text-lg lg:text-xl">${plant.name}</h3>
+              <p>${plant.description}</p>
               <div class="flex justify-between items-center">
-                <p><span>${plants.category}</span></p>
-                <p><span>${plants.price}</span></p>
+                <p><span class="bg-[#cff0dc] px-2 py-1 rounded-full">${plant.category}</span></p>
+                <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${plant.price}</span></p>
               </div>
-              <button class="btn btn-primary bg-[#15803D] w-full rounded-full">
+              <button onclick="addToCart('${plant.category}', ${plant.price})" class="btn btn-primary bg-[#15803D] w-full rounded-full mt-2">
                 Add to Cart
               </button>
        </div>
@@ -70,6 +99,74 @@ const showPlantsByCategory = (plants) => {
     `;
   });
 };
-loadCategory();
 
-loadPlantsByCategory("plants");
+// cart function
+const addToCart = (category, price) => {
+  carts.push({ category, price: Number(price) });
+  saveCarts();
+  showCarts(carts);
+};
+
+const showCarts = (carts) => {
+  cartContainer.innerHTML = "";
+  let total = 0;
+  carts.forEach((item, index) => {
+    total += item.price;
+    cartContainer.innerHTML += `
+  <div class="flex justify-between items-center gap-2 bg-[#cff0de] shadow-md p-2 rounded-lg">
+  <div>
+  <p>${item.category}</p>
+  <p>${item.price}</p>
+  </div>
+  <button onclick="removeFromCart(${index})" class="cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  `;
+  });
+  if (carts.length > 0) {
+    cartContainer.innerHTML += `
+    <div class="flex justify-between items-center mt-2 font-bold shadow-md p-2 rounded-lg">
+    <p>Total:</p>
+    <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${total}</span></p>
+    </div>
+    
+    `;
+  }
+};
+const removeFromCart = (index) => {
+  carts.splice(index, 1);
+  saveCarts();
+  showCarts(carts);
+};
+const saveCarts = () => localStorage.setItem("carts", JSON.stringify(carts));
+const loadCartsFromStorage = () => {
+  const stored = localStorage.getItem("carts");
+  if (stored) {
+    carts = JSON.parse(stored);
+    showCarts(carts);
+  }
+};
+
+const loadPlantDetail = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  console.log(url);
+  const res = await fetch(url);
+  const plant = await res.json();
+  showPlantDetails(plant.plants);
+};
+const showPlantDetails = (plant) => {
+  console.log(plant);
+  const detailsBox = document.getElementById("detailContainer");
+  detailsBox.innerHTML = `   <div class="">
+        <h2>${plant.name}</h2>
+ <img src="${plant.image}" alt="" class="w-full h-[186px] bg-[#ededed] rounded-lg object-cover" />
+  <p><span class="bg-[#cff0dc] px-2 py-1 rounded-full">${plant.category}</span></p>
+   <p>${plant.description}</p>
+    <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${plant.price}</span></p>
+      </div>
+`;
+
+  document.getElementById("plant_modal").showModal();
+};
+// page load
+loadCategory();
+loadCartsFromStorage();
