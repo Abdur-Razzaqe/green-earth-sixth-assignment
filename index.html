@@ -26,7 +26,7 @@
   </head>
   <body>
     <div
-      class="navbar bg-[#15803D] md:px-[135px] py-[24px] max-w-[1920px] mx-auto"
+      class="navbar bg-[#15803D] md:px-12 lg:px-[135px] py-4 max-w-[1920px] mx-auto"
     >
       <div class="navbar-start">
         <div class="dropdown">
@@ -67,7 +67,7 @@
       </div>
       <div class="navbar-end">
         <a
-          class="text-[#15803d] bg-[#facc15] px-2 py-1 rounded-full cursor-pointer mt-3"
+          class="text-[#15803d] bg-[#facc15] px-4 py-2 rounded-full cursor-pointer mt-3"
           >Plant a Tree</a
         >
       </div>
@@ -77,25 +77,35 @@
       <!-- banner section  -->
 
       <div class="bg-[#cff0dc] gap-5 max-w-[1920px] mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex flex-col md:flex-row justify-between items-center p-4">
           <div>
-            <img ms:w-[250px] h-[200px] src="./assets/hero-leaf1.png" alt="" />
+            <img
+              class="w-[150px] h-[120] md:w-[250px] md:h-[200px]"
+              src="./assets/hero-leaf1.png"
+              alt=""
+            />
           </div>
 
           <div class="space-y-3 text-center inter-font mt-4 p-2">
-            <h1 class="text-4xl font-bold">Plant a Tree, Grow a Future</h1>
-            <p class="text-sm">
+            <h1 class="text-2xl md:text-4xl font-bold">
+              Plant a Tree, Grow a Future
+            </h1>
+            <p class="text-sm md:text-base">
               Join our mission to plant 1 million trees and make the Earth
               greener for future generations.
             </p>
             <button
-              class="text-[#15803d] bg-[#facc15] px-3 py-2 rounded-full cursor-pointer mt-3"
+              class="text-[#15803d] bg-[#facc15] px-4 py-2 rounded-full cursor-pointer mt-3"
             >
               Get Involved
             </button>
           </div>
           <div>
-            <img src="./assets/hero-leaf2.png" alt="" />
+            <img
+              class="w-[150px] md:w-[250px]"
+              src="./assets/hero-leaf2.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -107,23 +117,25 @@
         ></span>
       </div>
       <!-- card section  -->
-      <section class="bg-[#F0FDF4]">
-        <h1 class="text-center text-4xl p-8 font-semibold">
+      <section class="bg-[#F0FDF4] p-4">
+        <h1 class="text-center text-2xl md:text-4xl p-4 font-semibold">
           Choose Your Trees
         </h1>
         <div
-          class="category-all max-w-[1650px] mx-auto grid grid-cols-12 gap-5 flex-col md:flex-row"
+          class="category-all max-w-[1650px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-5"
         >
           <div class="categories col-span-2 w-full">
-            <h2 class="text-xl font-semibold px-2">Categories</h2>
+            <h2 class="text-lg md:text-xl font-semibold px-2">Categories</h2>
             <ul id="categoryContainer" class="rounded-xl"></ul>
           </div>
+          <!-- plants  -->
           <div
             id="plantsContainer"
-            class="categories grid grid-cols-3 col-span-8"
+            class="categories grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 col-span-8 gap-4"
           ></div>
+          <!-- cart  -->
           <div
-            class="categories col-span-2 gap-2 bg-[#FFFFFF] p-2 w-full flex-col rounded-lg shadow-md"
+            class="categories md:col-span-2 gap-2 bg-[#FFFFFF] p-2 w-full flex-col rounded-lg shadow-md"
           >
             <h2 class="text-xl font-bold mb-3">Your Cart</h2>
             <div id="cartContainer" class="space-y-2"></div>
@@ -132,16 +144,16 @@
       </section>
       <!--About campaign section  -->
 
-      <section class="max-w-[1920px] mx-auto bg-[#F0FDF4]">
-        <h1 class="text-center text-4xl py-10 font-semibold">
+      <section class="max-w-[1920px] mx-auto bg-[#F0FDF4] p-4">
+        <h1 class="text-center text-2xl md:text-4xl py-6 font-semibold">
           About the Campaign
         </h1>
         <div class="">
           <div
-            class="flex justify-center items-center gap-10 flex-col md:flex-row max-w-[1090px] mx-auto space-y-4 p-3"
+            class="flex justify-center items-center gap-6 flex-col md:flex-row max-w-[1090px] mx-auto space-y-4 p-3"
           >
-            <img src="./assets/about.png" alt="" />
-            <div class="mb-2">
+            <img class="w-full md:w-[50%]" src="./assets/about.png" alt="" />
+            <div class="mb-2 text-center md:text-left">
               <p class="p-2 text-justify">
                 Green Earth is a global tree plantation initiative dedicated to
                 fighting climate change. Since our start, we've planted over
@@ -149,11 +161,11 @@
                 restore forests, create habitats for wildlife, and combat global
                 warming.
               </p>
-              <p class="space-y-1">
+              <ul class="list-disc list-inside">
                 <li>Restoration of natural habitats</li>
                 <li>Improvement of air quality</li>
                 <li>Support for local communities</li>
-              </p>
+              </ul>
             </div>
           </div>
         </div>
@@ -162,16 +174,18 @@
       <!-- our impact section  -->
       <section class="max-w-[1920px] mx-auto bg-[#cff0dc]">
         <div class="max-w-[1650px] mx-auto">
-          <h1 class="font-bold text-center inter-font text-2xl pt-8">
+          <h1
+            class="font-bold text-center inter-font text-2xl md:text-3xl pt-8"
+          >
             Our Impact
           </h1>
           <div
-            class="flex justify-between items-center gap-[50px] p-[40px] sm:p-[20px] flex-col md:flex-row"
+            class="flex flex-col md:flex-row justify-between items-center gap-6 p-4"
           >
             <div
-              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+              class="card card-border bg-base-100 w-full md:w-[30%] hover:bg-green-200"
             >
-              <div class="card-body text-center space-y-0">
+              <div class="card-body text-center">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   500K+
                 </h2>
@@ -179,9 +193,9 @@
               </div>
             </div>
             <div
-              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+              class="card card-border bg-base-100 w-full md:w-[30%] hover:bg-green-200"
             >
-              <div class="card-body text-center space-y-0">
+              <div class="card-body text-center">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   120+
                 </h2>
@@ -189,9 +203,9 @@
               </div>
             </div>
             <div
-              class="card card-border bg-base-100 w-[100%] hover:bg-green-200"
+              class="card card-border bg-base-100 w-full md:w-[30%] hover:bg-green-200"
             >
-              <div class="card-body text-center space-y-0">
+              <div class="card-body text-center">
                 <h2 class="text-center font-semibold text-xl text-[#15803d]">
                   30+
                 </h2>
@@ -201,23 +215,23 @@
           </div>
         </div>
       </section>
-      <!-- plant a tree today section  -->
-      <section class="max-w-[1920px] mx-auto bg-[#15803D]">
-        <h1 class="font-bold text-center inter-font text-2xl pt-8">
+      <!-- donation form  -->
+      <section class="max-w-[1920px] mx-auto bg-[#15803D] p-4">
+        <h1 class="font-bold text-center inter-font text-2xl md:text-3xl pt-8">
           Plant a Tree Today
         </h1>
-        <div class="flex justify-center items-cente p-[40px]">
-          <div class="card bg-[#07943b] w-[650px] h-[290px] md:w-[500px]">
+        <div class="flex justify-center items-cente p-4">
+          <div class="card bg-[#07943b] w-[650px] md:w-[500px]">
             <div class="card-body">
-              <fieldset class="fieldset rounded-box w-full p-4">
+              <fieldset class="fieldset rounded-box w-full p-4 space-y-3">
                 <input
-                  type="name"
-                  class="input rounded-box w-full p-4"
+                  type="text"
+                  class="input rounded-box w-full p-3"
                   placeholder="Your Name"
                 />
                 <input
                   type="email"
-                  class="input rounded-box w-full p-4"
+                  class="input rounded-box w-full p-3"
                   placeholder="Your Email Address"
                 />
                 <select class="select w-full rounded-box">
