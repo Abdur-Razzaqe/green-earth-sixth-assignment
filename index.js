@@ -89,7 +89,7 @@ const showPlantsByCategory = (plants) => {
               <p>${plant.description}</p>
               <div class="flex justify-between items-center">
                 <p><span class="bg-[#cff0dc] px-2 py-1 rounded-full">${plant.category}</span></p>
-                <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${plant.price}</span></p>
+                <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span class="font-bold">${plant.price}</span></p>
               </div>
               <button onclick="addToCart('${plant.category}', ${plant.price})" class="btn btn-primary bg-[#15803D] w-full rounded-full mt-2">
                 Add to Cart
@@ -116,7 +116,9 @@ const showCarts = (carts) => {
   <div class="flex justify-between items-center gap-2 bg-[#cff0de] shadow-md p-2 rounded-lg">
   <div>
   <p>${item.category}</p>
-  <p>${item.price}</p>
+  <p class="text-sm"><i class="fa-solid fa-bangladeshi-taka-sign"></i>${
+    item.price
+  }<span>${" "}<i class="fa-solid fa-xmark"></i>${" "}</span>1</p>
   </div>
   <button onclick="removeFromCart(${index})" class="cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
   </div>
@@ -156,13 +158,22 @@ const loadPlantDetail = async (id) => {
 const showPlantDetails = (plant) => {
   console.log(plant);
   const detailsBox = document.getElementById("detailContainer");
-  detailsBox.innerHTML = `   <div class="">
-        <h2>${plant.name}</h2>
- <img src="${plant.image}" alt="" class="w-full h-[186px] bg-[#ededed] rounded-lg object-cover" />
-  <p><span class="bg-[#cff0dc] px-2 py-1 rounded-full">${plant.category}</span></p>
-   <p>${plant.description}</p>
-    <p><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${plant.price}</span></p>
-      </div>
+  detailsBox.innerHTML = `   <div class="space-y-2">
+        <h2 class="font-bold text-lg">${plant.name}</h2>
+ <img src="${
+   plant.image
+ }" alt="" class="w-full h-[186px] bg-[#ededed] rounded-lg object-cover" />
+  <p ><span class="font-semibold space-x-2">Category:${" "}</span><span>${
+    plant.category
+  }</span></p>
+  <p><span class="font-semibold">Price:${" "}</span><i class="fa-solid fa-bangladeshi-taka-sign"></i><span>${
+    plant.price
+  }</span></p>
+   <p><span class="font-semibold">Description:${" "}</span> ${
+    plant.description
+  }</p>
+    
+</div>
 `;
 
   document.getElementById("plant_modal").showModal();
