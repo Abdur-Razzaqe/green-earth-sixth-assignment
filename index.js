@@ -62,7 +62,6 @@ const loadAllPlants = () => {
 // load plants by category
 
 const loadPlantsByCategory = (categoryId, limit = null) => {
-  showSpinner();
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((data) => {
